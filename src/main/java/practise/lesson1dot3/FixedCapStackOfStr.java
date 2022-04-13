@@ -79,15 +79,18 @@ public class FixedCapStackOfStr<T> implements Iterable<T> {
         System.out.println(Arrays.toString(Arrays.stream(s.items).toArray()));
         System.out.println(s.size());
         System.out.println(s.isEmpty());
-        for (int i = 0, size = s.size; i < size; i++) {
-            System.out.println(s.pop());
-        }
+//        for (int i = 0, size = s.size; i < size; i++) {
+//            System.out.println(s.pop());
+//        }
         System.out.println(Arrays.toString(Arrays.stream(s.items).toArray()));
+        for (String s1 : s) {
+            System.out.println(s1);
+        }
     }
 
     @Override
     public Iterator<T> iterator() {
-        return null;
+        return new ReverseArrayIterator();
     }
 
     @Override
@@ -98,5 +101,20 @@ public class FixedCapStackOfStr<T> implements Iterable<T> {
     @Override
     public Spliterator<T> spliterator() {
         return null;
+    }
+
+    private class ReverseArrayIterator implements Iterator<T> {
+
+        private int i = size;
+
+        @Override
+        public boolean hasNext() {
+            return i > 0;
+        }
+
+        @Override
+        public T next() {
+            return items[--i];
+        }
     }
 }

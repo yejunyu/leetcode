@@ -2,6 +2,8 @@ package sort;
 
 import sort.bubble.BubbleSort;
 import sort.quick.QuickSort;
+import sort.select.InsertSort;
+import sort.select.SelectSort;
 
 import java.util.Arrays;
 
@@ -20,10 +22,11 @@ public class Main {
         Integer[] arr1 = Helper.copyArr(arr);
         Integer[] arr2 = Helper.copyArr(arr);
         Integer[] arr3 = Helper.copyArr(arr);
-        System.out.println("排序前: " + Arrays.toString(arr));
-//        Helper.getTime(new SelectionSort(), arr);
+//        System.out.println("排序前: " + Arrays.toString(arr));
+        Helper.getTime(new SelectSort(), arr);
         Helper.getTime(new BubbleSort(), arr1);
         Helper.getTime(new QuickSort(), arr2);
+        Helper.getTime(new InsertSort(), arr3);
 //        Helper.getTime(new MergeSort(), arr3);
     }
 }

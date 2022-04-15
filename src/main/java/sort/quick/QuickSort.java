@@ -10,6 +10,10 @@ import sort.CallBack;
  */
 public class QuickSort implements CallBack {
 
+    public QuickSort() {
+        System.out.println("快速排序");
+    }
+
     <T extends Comparable<T>> void quickSort(T[] ts, int l, int r) {
         // i,j两个指针, t 用来左右交换, temp 用来存基准数
         int i, j;
@@ -41,7 +45,7 @@ public class QuickSort implements CallBack {
 
     @Override
     public <T extends Comparable<T>> T[] sort(T[] ts) {
-        quickSort(ts, 0, ts.length-1);
+        quickSort(ts, 0, ts.length - 1);
         return ts;
     }
 }

@@ -1,9 +1,6 @@
 package practise.lesson1dot3;
 
-import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Random;
-import java.util.Spliterator;
+import java.util.*;
 import java.util.function.Consumer;
 
 /**
@@ -12,33 +9,39 @@ import java.util.function.Consumer;
  * @email : yyyejunyu@gmail.com
  * @date : 2022/4/13
  */
-public class FixedCapStackOfStr<T> implements Iterable<T> {
+public class LinkedStack<T> implements Iterable<T> {
     private int size;
-    private T[] items;
     private int cap;
+    private Node head;
 
-    public FixedCapStackOfStr(int cap) {
-        this.cap = cap;
-        items = (T[]) new Object[cap];
+    private class Node {
+        private T item;
+        private Node next;
     }
 
-    public void push(T item) {
+    public LinkedStack(int cap) {
+        this.cap = cap;
+    }
+
+    public void push(T item) throws Exception {
         if (isFull()) {
-            resize(2 * size);
+            throw new Exception("满了啊");
         }
-        items[size++] = item;
+        size++;
+        Node oldHead = head;
+        head = new Node();
+        head.item = item;
+        head.next = oldHead;
     }
 
     public T pop() throws Exception {
         if (isEmpty()) {
             throw new Exception("空了, 不能 pop 了");
         }
-        T t = items[--size];
-        items[size] = null;
-        if (size > 0 && size <= cap / 4) {
-            resize(cap / 2);
-        }
-        return t;
+        T r = head.item;
+        head = head.next;
+        size--;
+        return r;
     }
 
     public boolean isEmpty() {
@@ -53,21 +56,11 @@ public class FixedCapStackOfStr<T> implements Iterable<T> {
         return size;
     }
 
-    public void resize(int max) {
-        T[] newT = (T[]) new Object[max];
-        for (int i = 0; i < size; i++) {
-            newT[i] = items[i];
-        }
-        cap = max;
-        items = newT;
-        newT = null;
-    }
-
     public static void main(String[] args) throws Exception {
         int a = 'a';
         int z = 'z';
         int n = 10;
-        FixedCapStackOfStr<String> s = new FixedCapStackOfStr<>(n);
+        LinkedStack<String> s = new LinkedStack<>(n);
         for (int i = 0; i < n; i++) {
             Random r = new Random();
             int i1 = a + r.nextInt(z - a + 1);
@@ -75,14 +68,10 @@ public class FixedCapStackOfStr<T> implements Iterable<T> {
             System.out.println(c);
             s.push(String.valueOf(c));
         }
-        s.push("aaaaa");
-        System.out.println(Arrays.toString(Arrays.stream(s.items).toArray()));
-        System.out.println(s.size());
-        System.out.println(s.isEmpty());
-//        for (int i = 0, size = s.size; i < size; i++) {
-//            System.out.println(s.pop());
+        System.out.println("==================");
+//        for (LinkedStack.Node x = s.head; x != null; x = x.next) {
+//            System.out.println(x.item);
 //        }
-        System.out.println(Arrays.toString(Arrays.stream(s.items).toArray()));
         for (String s1 : s) {
             System.out.println(s1);
         }
@@ -90,12 +79,12 @@ public class FixedCapStackOfStr<T> implements Iterable<T> {
 
     @Override
     public Iterator<T> iterator() {
-        return new ReverseArrayIterator();
+//        return null;
+        return new ReverseArrayIterator(this);
     }
 
     @Override
     public void forEach(Consumer<? super T> action) {
-
     }
 
     @Override
@@ -105,16 +94,25 @@ public class FixedCapStackOfStr<T> implements Iterable<T> {
 
     private class ReverseArrayIterator implements Iterator<T> {
 
-        private int i = size;
+        private LinkedStack stack;
+
+        public ReverseArrayIterator(LinkedStack stack) {
+            this.stack = stack;
+        }
 
         @Override
         public boolean hasNext() {
-            return i > 0;
+            return stack.head!=null;
         }
 
         @Override
         public T next() {
-            return items[--i];
+            try {
+                return (T) stack.pop();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            return null;
         }
     }
 }

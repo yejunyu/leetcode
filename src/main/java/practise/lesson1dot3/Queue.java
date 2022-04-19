@@ -80,13 +80,26 @@ public class Queue<T> implements Iterable<T> {
             Random r = new Random();
             int i1 = a + r.nextInt(z - a + 1);
             char c = (char) i1;
-            System.out.println(c);
+            System.out.print(c+" ");
             s.enqueue(String.valueOf(c));
         }
         System.out.println("==================");
         for (int i = 0, size = s.size(); i < size; i++) {
             String dequeue = s.dequeue();
-            System.out.println(dequeue);
+            System.out.print(dequeue+" ");
+        }
+        System.out.println("==================");
+        for (int i = 0; i < n; i++) {
+            Random r = new Random();
+            int i1 = a + r.nextInt(z - a + 1);
+            char c = (char) i1;
+            System.out.print(c+" ");
+            s.enqueue(String.valueOf(c));
+        }
+        System.out.println("==================");
+        for (int i = 0, size = s.size(); i < size; i++) {
+            String dequeue = s.dequeue();
+            System.out.print(dequeue+" ");
         }
     }
 }

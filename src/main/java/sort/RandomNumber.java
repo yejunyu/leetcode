@@ -1,5 +1,6 @@
 package sort;
 
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -16,5 +17,10 @@ public class RandomNumber {
             numArr[i] = minNum + random.nextInt(maxNum - minNum + 1);
         }
         return numArr;
+    }
+
+    public static int[] createSortNumber(int size) {
+        Integer[] sortNumber = createSortNumber(size, 1, 10000);
+        return Arrays.stream(sortNumber).mapToInt(i -> i.intValue()).toArray();
     }
 }

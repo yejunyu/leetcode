@@ -15,7 +15,7 @@ public class _206_反转链表 {
      * @return
      */
     public static MyLink.Node reverseList1(MyLink.Node head) {
-        if (head == null||head.next==null) {
+        if (head.next == null) {
             return head;
         }
         MyLink.Node newHead = reverseList1(head.next);
@@ -31,11 +31,11 @@ public class _206_反转链表 {
      * @return
      */
     public static MyLink.Node reverseList2(MyLink.Node head) {
-        if (head == null||head.next==null) {
+        if (head.next == null) {
             return head;
         }
-        MyLink.Node newHead = null;
-        while (head!=null){
+        MyLink.Node newHead = new MyLink.Node(null);
+        while (head.next != null) {
             MyLink.Node tmp = head.next;
             head.next = newHead;
             newHead = head;
@@ -45,9 +45,10 @@ public class _206_反转链表 {
     }
 
     public static void main(String[] args) {
-        MyLink  link = new MyLink("a");
-        link = link.init();
-        MyLink.Node node = reverseList1(link.head);
-
+        MyLink link = new MyLink();
+        link.init();
+        link.print();
+        reverseList1(link.head);
+        link.print();
     }
 }

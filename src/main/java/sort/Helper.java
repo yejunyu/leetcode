@@ -10,9 +10,9 @@ import java.util.Arrays;
  */
 public class Helper {
 
-    public static <T extends Comparable<T>> void getTime(CallBack callBack, T[] arr) {
+    public static <T extends Comparable<T>> void getTime(CallBack callBack, Integer[] arr) {
         long startTime = System.currentTimeMillis();
-        T[] a = callBack.sort(arr);
+        Integer[] a = callBack.sort(arr);
         long endTime = System.currentTimeMillis();
         System.out.println("执行时间为: " + (endTime - startTime) + " ms");
         print(a);

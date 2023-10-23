@@ -13,19 +13,25 @@ public class SelectSort implements CallBack {
         System.out.println("选择排序");
     }
 
+    // 10000个数据235ms
     @Override
     public <T extends Comparable<T>> T[] sort(T[] ts) {
-        for (int i = 0; i < ts.length; i++) {
-            T min = ts[i];
-            for (int j = i + 1; j < ts.length; j++) {
-                if (ts[j].compareTo(min) < 0) {
-                    min = ts[j];
-                    T temp = ts[i];
-                    ts[i] = ts[j];
-                    ts[j] = temp;
-                }
+        for (int i = 0; i < ts.length - 1; i++) {
+            int minPos = i;
+            int maxPos = ts.length-1-i;
+            for (int j = i + 1; j < ts.length - i - 1; j++) {
+                minPos = ts[j].compareTo(ts[minPos]) < 0 ? j : minPos;
+                maxPos = ts[j].compareTo(ts[maxPos]) > 0 ? j : maxPos;
             }
+            swap(ts, i, minPos);
+            swap(ts, ts.length - 1 - i, maxPos);
         }
         return ts;
+    }
+
+    private <T extends Comparable<T>> void swap(T[] ts, int i, int j) {
+        T temp = ts[i];
+        ts[i] = ts[j];
+        ts[j] = temp;
     }
 }

@@ -17,7 +17,7 @@ import java.util.Arrays;
 public class Main {
 
     public static void main(String[] args) {
-        int size = 10000;
+        int size = 50000;
         Integer[] arr = RandomNumber.createSortNumber(size, 10, 20000);
         Integer[] arr1 = Helper.copyArr(arr);
         Integer[] arr2 = Helper.copyArr(arr);

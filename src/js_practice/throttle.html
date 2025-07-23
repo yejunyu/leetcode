@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <title>节流练习</title>
+    <style>
+        #scroll-box {
+            height: 200px;
+            overflow-y: scroll;
+            border: 1px solid black;
+        }
+
+        #scroll-box div {
+            height: 1000px;
+        }
+    </style>
+</head>
+<body>
+<div id="scroll-box">
+    <div>请在这里滚动鼠标滚轮...</div>
+</div>
+<p>滚动事件触发次数: <span id="count">0</span></p>
+
+<script>
+    // --- 请在这里实现你的 throttle 函数 ---
+    function throttle(fn, delay) {
+        // ... 你的代码 ...
+        let isThrottled = false
+        return (...args) => {
+            if (isThrottled) {
+                return
+            }
+            isThrottled = true
+            fn.apply(this, args)
+            setTimeout(() => {
+                isThrottled = false
+            }, delay)
+        }
+    }
+
+    // --- 使用示例 ---
+    const scrollBox = document.getElementById('scroll-box');
+    const countSpan = document.getElementById('count');
+    let triggerCount = 0;
+
+    function onScroll() {
+        triggerCount++;
+        countSpan.textContent = triggerCount;
+        console.log('滚动事件被处理了！次数:', triggerCount);
+    }
+
+    const throttledScroll = throttle(onScroll, 1000); // 每1000毫秒最多执行一次
+
+    scrollBox.addEventListener('scroll', throttledScroll);
+</script>
+</body>
+</html>

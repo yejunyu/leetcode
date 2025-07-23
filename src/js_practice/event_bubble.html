@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <title>事件代理练习</title>
+</head>
+
+<body>
+
+<h1>商品列表</h1>
+<ul id="product-list">
+    <li>商品A -
+        <button>添加到购物车</button>
+    </li>
+    <li>商品B -
+        <button>添加到购物车</button>
+    </li>
+    <li>商品C -
+        <button>添加到购物车</button>
+    </li>
+</ul>
+
+<button id="add-new-product">添加新商品</button>
+
+<script>
+    // --- 你的代码写在这里 ---
+
+    // 任务1: 使用事件代理，给 id 为 'product-list' 的 ul 元素添加一个点击事件监听器。
+    const ulDom = document.getElementById("product-list");
+    // 任务2: 在监听函数内部，判断被点击的元素 (event.target) 是否是一个 button。
+    ulDom.addEventListener("click", (e) => {
+        if (e.target.tagName === "BUTTON") {
+            let liDom = e.target.parentElement
+            console.log(liDom.textContent) // 商品C -添加到购物车
+            let productName = liDom.textContent.split("-")[0]
+            console.log(productName)
+        }
+
+    })
+    // 任务3: 如果是 button，获取其父元素 li 的文本内容，并从中提取出商品名称（如 "商品A"），然后打印到控制台。
+
+    // --- 用于测试动态添加的元素 ---
+    const addNewBtn = document.getElementById('add-new-product');
+    addNewBtn.addEventListener('click', () => {
+        const newLi = document.createElement('li');
+        const productNum = document.getElementById('product-list').children.length + 1;
+        newLi.innerHTML = `商品${String.fromCharCode(64 + productNum)} - <button>添加到购物车</button>`;
+        document.getElementById('product-list').appendChild(newLi);
+    });
+</script>
+</body>
+
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta name="" content="" charset="utf-8">
+    <title>防抖练习</title>
+</head>
+
+<body>
+<input type="text" id="search-input" placeholder="输入内容以触发API请求...">
+<p>API请求次数: <span id="count">0</span></p>
+
+<script>
+    // --- 请在这里实现你的 debounce 函数 ---
+    function debounce(fn, delay) {
+        // ... 你的代码 ...
+        let timer = null
+        return (...args) => {
+            if (timer) {
+                clearTimeout(timer)
+            }
+            timer = setTimeout(() => {
+                fn.apply(this, args)
+            }, delay)
+        }
+    }
+
+    // --- 使用示例 ---
+    const searchInput = document.getElementById('search-input');
+    const countSpan = document.getElementById('count');
+    let requestCount = 0;
+
+    // 这是一个模拟的API请求函数
+    function fakeApiRequest(a) {
+        requestCount++;
+        console.log(a)
+        countSpan.textContent = requestCount;
+        console.log(searchInput.value)
+        console.log('正在发送API请求... 请求次数:', requestCount);
+    }
+
+    // 使用你实现的 debounce 函数包装我们的请求函数
+    const debouncedRequest = debounce(fakeApiRequest, 1000); // 延迟500毫秒
+
+    // 将事件监听器绑定到返回的新函数上
+    searchInput.addEventListener('input', () => {
+        debouncedRequest("传参")
+    });
+</script>
+</body>
+
+</html>

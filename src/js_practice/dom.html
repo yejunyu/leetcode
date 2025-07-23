@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>DOM练习</title>
+    <style>
+        .highlight {
+            background-color: yellow;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<h1 id="main-title">欢迎！</h1>
+<p>这是一个段落。</p>
+<div id="container"></div>
+
+<script>
+    // --- 你的代码写在这里 ---
+
+    // 任务1: 找到ID为 'main-title' 的元素，并将其文本内容更改为 "DOM 操作入门"。
+    document.getElementById("main-title").textContent = "DOM 操作入门"
+    // 任务2: 创建一个新的 <p> 元素，设置其文本内容为 "这是新添加的段落。"。
+    var pDom = document.createElement("p")
+    pDom.textContent = "这是新添加的段落。"
+    // 任务3: 给这个新的 <p> 元素添加一个名为 'highlight' 的CSS类。
+    pDom.classList.add("highlight")
+    // 任务4: 将这个新的 <p> 元素添加到ID为 'container' 的 div 内部。
+    var container = document.getElementById("container")
+    var container1 = document.querySelector("#container")
+    container.appendChild(pDom)
+</script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="zh">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Document</title>
+</head>
+<style>
+    *,
+    *::before,
+    *::after {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+
+    .content {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .menu-toggle {
+        font-size: 24px;
+        position: fixed;
+        top: 20px;
+        left: 20px;
+        cursor: pointer;
+        z-index: 1000;
+    }
+
+    .nav-menu {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 250px;
+        height: 100%;
+        z-index: 999;
+        /* key1*/
+        transform: translateX(-100%);
+        background-color: #333;
+        /* key2 */
+        transition: transfrom 0.3s ease-in-out;
+    }
+
+    body.menu-open .nav-menu {
+        /* key3 */
+        transform: translateX(0);
+    }
+
+    .overlay {
+        width: 100vw;
+        height: 100vh;
+        z-index: 999;
+        background-color: rgba(0, 0, 0, 0.5);
+        /*    key4 */
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    }
+
+    body.menu-open .overlay {
+        /* key5 */
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .nav-menu ul {
+        list-style: none;
+        margin-top: 20px;
+        margin-left: 20px;
+    }
+
+    .nav-menu ul li a {
+        display: block;
+        text-decoration: none;
+        color: white;
+        padding: 15px 20px;
+        border-bottom: 1px solid #444;
+    }
+
+    .nav-menu ul li a:hover {
+        background-color: #555;
+    }
+</style>
+<body>
+<div class="menu-toggle" id="menu-toggle">☰</div>
+<nav class="nav-menu">
+    <ul>
+        <li><a href="#">首页</a></li>
+        <li><a href="#">产品</a></li>
+        <li><a href="#">关于我们</a></li>
+        <li><a href="#">联系方式</a></li>
+    </ul>
+</nav>
+<div class="overlay"></div>
+<main class="content">
+    <h1>主内容标题</h1>
+    <p>这是一段正文正文正文!!!</p>
+</main>
+</body>
+<script>
+    var menuToggle = document.querySelector(".menu-toggle")
+    var overlay = document.querySelector(".overlay")
+    var body = document.querySelector("body")
+
+    function toggleMenu() {
+        body.classList.toggle("menu-open")
+    }
+
+    menuToggle.addEventListener("click", toggleMenu)
+    overlay.addEventListener("click", toggleMenu)
+</script>
+</html>

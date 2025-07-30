@@ -22,7 +22,7 @@ function removeElement(nums, val) {
       k++; // Increment the count of valid elements
     }
   }
-
+  console.log(nums)
   return k; // Return the count of valid elements
 }
 

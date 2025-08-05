@@ -30,7 +30,7 @@ func partition(nums []int, l int, r int) int {
 	return j
 }
 func main() {
-	var nums = []int{9, 8, 71, 61, 13, 6, 7, 5, 4, 3, 2, 1}
+	var nums = []int{9, 8, 9, 71, 61, 13, 6, 8, 7, 5, 4, 3, 2, 1, 61}
 	sort(nums)
 	fmt.Println(nums)
 }
